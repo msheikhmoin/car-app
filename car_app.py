@@ -80,7 +80,9 @@ if selected_car:
 """, unsafe_allow_html=True)
 
 
-    image_path = car_info["image"]
+     # **FIX: Image Path Issue for Deployment**
+    image_path = os.path.join(os.path.dirname(__file__), car_info["image"])
+    
     if os.path.exists(image_path):
         img = Image.open(image_path)
         st.image(img, caption=selected_car, use_container_width=True)
