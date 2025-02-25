@@ -26,6 +26,9 @@ st.markdown(
     unsafe_allow_html=True
 )
 
+# Car Data Dictionary (Images hosted on GitHub)
+GITHUB_BASE_URL = "https://raw.githubusercontent.com/msheikhmoin/car-app/main/car_app/"
+
 # Car Data Dictionary
 car_data = {
     "Tesla Model S": {
