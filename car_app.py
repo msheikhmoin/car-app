@@ -1,5 +1,4 @@
 import streamlit as st
-from PIL import Image
 import os
 
 # Page Configuration
@@ -26,10 +25,10 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# Car Data Dictionary (Images hosted on GitHub)
-GITHUB_BASE_URL = "https://raw.githubusercontent.com/msheikhmoin/car-app/main/car_app/"
+# **GitHub Base URL for Images**
+GITHUB_BASE_URL = "https://raw.githubusercontent.com/msheikhmoin/car-app/main/Car_app/"
 
-# Car Data Dictionary
+# **Car Data Dictionary**
 car_data = {
     "Tesla Model S": {
         "manufacturer": "Tesla, Inc.",
@@ -42,7 +41,7 @@ car_data = {
         "seating_capacity": "5 Adults",
         "features": ["Autopilot", "Glass Roof", "Wireless Charging", "Premium Sound System"],
         "safety_features": ["Automatic Emergency Braking", "Lane Keeping Assist", "Collision Warning"],
-        "image": "Car_app/patric.jpg"
+        "image": "patric.jpg"
     },
     "BMW i8": {
         "manufacturer": "BMW",
@@ -55,7 +54,7 @@ car_data = {
         "seating_capacity": "4 Adults",
         "features": ["Scissor Doors", "Carbon Fiber Body", "HUD Display", "Gesture Control"],
         "safety_features": ["ABS Brakes", "Lane Departure Warning", "Adaptive Headlights"],
-        "image": "Car_app/bmw-i8.jpg"
+        "image": "bmw-i8.jpg"
     },
     "Audi e-tron GT": {
         "manufacturer": "Audi AG",
@@ -68,31 +67,25 @@ car_data = {
         "seating_capacity": "5 Adults",
         "features": ["Matrix LED Headlights", "Quattro AWD System", "Sports Seats", "Bang & Olufsen Sound"],
         "safety_features": ["Traffic Sign Recognition", "Night Vision Assist", "Side Assist"],
-        "image": "Car_app/audi-e-tron-gt.jpg"
+        "image": "audi-e-tron-gt.jpg"
     }
 }
 
-# Car Selection
+# **Car Selection Dropdown**
 selected_car = st.selectbox("Select a Car", list(car_data.keys()))
 
-# Display Selected Car Information
+# **Display Selected Car Information**
 if selected_car:
     car_info = car_data[selected_car]
     st.markdown(f"""
     <h3 style="color: red;">🚗 {car_info['manufacturer']} - {car_info['origin_country']}</h3>
-""", unsafe_allow_html=True)
+    """, unsafe_allow_html=True)
 
+    # **Fix: Correct Image URL**
+    image_url = f"{GITHUB_BASE_URL}{car_info['image']}"
+    st.image(image_url, caption=selected_car, use_container_width=True)
 
-     # **FIX: Image Path Issue for Deployment**
-    image_path = os.path.join(os.path.dirname(__file__), car_info["image"])
-    
-    if os.path.exists(image_path):
-        img = Image.open(image_path)
-        st.image(img, caption=selected_car, use_container_width=True)
-    else:
-        st.image("https://via.placeholder.com/300?text=No+Image", caption="Image Not Available", use_container_width=True)
-
-    # Car Details
+    # **Car Details**
     st.write(f"💰 **Price:** {car_info['price']}")
     st.write(f"⚡ **Engine:** {car_info['engine']}")
     st.write(f"🚀 **Top Speed:** {car_info['top_speed']}")
@@ -100,10 +93,10 @@ if selected_car:
     st.write(f"🔋 **Battery Range:** {car_info['range']}")
     st.write(f"🛋️ **Seating Capacity:** {car_info['seating_capacity']}")
 
-    # Features Section
+    # **Features Section**
     st.markdown("<h4 style='color: red;'>🚀 Features</h4>", unsafe_allow_html=True)
     st.write(", ".join(car_info['features']))
 
-    # Safety Features Section
+    # **Safety Features Section**
     st.markdown("<h4 style='color: red;'>🛡️ Safety Features</h4>", unsafe_allow_html=True)
     st.write(", ".join(car_info['safety_features']))
