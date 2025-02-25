@@ -26,7 +26,7 @@ st.markdown(
 )
 
 # **GitHub Base URL for Images**
-GITHUB_BASE_URL = "https://raw.githubusercontent.com/msheikhmoin/car-app/main/Car_app/"
+GITHUB_BASE_URL = "https://raw.githubusercontent.com/msheikhmoin/car-app/main/car_app/"
 
 # **Car Data Dictionary**
 car_data = {
